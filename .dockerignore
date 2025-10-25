@@ -1,0 +1,25 @@
+# Git files
+.git
+.gitignore
+
+# Documentation
+README.md
+LICENSE
+
+# Docker files (not needed in image)
+docker-compose.yml
+.dockerignore
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+*.tmp
+*.bak

@@ -1,0 +1,27 @@
+# Build artifacts
+*.log
+*.tmp
+
+# Docker volumes data (if mounted locally)
+/data/
+/volumes/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local environment files
+.env
+.env.local
+
+# Temporary files
+/tmp/
+*.bak

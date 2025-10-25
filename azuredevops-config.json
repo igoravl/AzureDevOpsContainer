@@ -1,0 +1,21 @@
+{
+  "InstallSqlExpress": "False",
+  "UseIntegratedAuth": "False",
+  "SqlInstance": "sqlserver",
+  "DatabaseLabel": "AzureDevOps",
+  "IsPreProductionInstance": "False",
+  "SiteBindings": [
+    {
+      "Protocol": "http",
+      "Port": "8080",
+      "HostHeader": ""
+    }
+  ],
+  "WebSiteVirtualDirectoryName": "tfs",
+  "CreateWebSite": "True",
+  "FileCacheFolder": "C:\\AzureDevOpsData\\ApplicationTier\\_fileCache",
+  "ConfigureSMTP": "False",
+  "ConfigureReporting": "False",
+  "ConfigureSearch": "False",
+  "ConfigureAnalysis": "False"
+}
