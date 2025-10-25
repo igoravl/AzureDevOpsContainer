@@ -7,7 +7,7 @@ services:
     container_name: azuredevops-sqlserver
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong!Passw0rd
+      - SA_PASSWORD=${SA_PASSWORD:-YourStrong!Passw0rd}
       - MSSQL_PID=Developer
     ports:
       - "1433:1433"
@@ -16,7 +16,7 @@ services:
     networks:
       - azuredevops-network
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrong!Passw0rd", "-Q", "SELECT 1"]
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${SA_PASSWORD:-YourStrong!Passw0rd}", "-Q", "SELECT 1"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -29,13 +29,14 @@ services:
       dockerfile: Dockerfile
       args:
         # Set this to the drive letter where the ISO is mounted (e.g., D:, E:, F:)
-        DVD_DRIVE: "D:"
+        # Can be overridden via .env file
+        DVD_DRIVE: ${DVD_DRIVE:-D:}
     container_name: azuredevops-server
     depends_on:
       sqlserver:
         condition: service_healthy
     environment:
-      - SA_PASSWORD=YourStrong!Passw0rd
+      - SA_PASSWORD=${SA_PASSWORD:-YourStrong!Passw0rd}
     ports:
       - "8080:8080"
     volumes:

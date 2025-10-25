@@ -28,7 +28,18 @@ On Windows, right-click the ISO file and select "Mount". Note the drive letter a
 
 ### 3. Configure the Build
 
-Edit `docker-compose.yml` and update the `DVD_DRIVE` argument to match your mounted ISO drive:
+Option 1: Using environment variables file (recommended)
+
+```bash
+# Copy the example environment file
+cp .env.example .env
+
+# Edit .env and set your values
+# SA_PASSWORD=YourSecurePassword123!
+# DVD_DRIVE=E:
+```
+
+Option 2: Edit `docker-compose.yml` directly and update the `DVD_DRIVE` argument:
 
 ```yaml
 azuredevops:
@@ -39,7 +50,11 @@ azuredevops:
 
 ### 4. Configure SQL Server Password
 
-Edit `docker-compose.yml` and update the `SA_PASSWORD` for both services:
+Option 1: Using .env file (recommended)
+
+The password is already set in your `.env` file from step 3.
+
+Option 2: Edit `docker-compose.yml` directly and update the `SA_PASSWORD`:
 
 ```yaml
 environment:
