@@ -13,10 +13,11 @@ services:
       - "1433:1433"
     volumes:
       - sqlserver-data:/var/opt/mssql
+      - ./healthcheck-sql.sh:/healthcheck.sh:ro
     networks:
       - azuredevops-network
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${SA_PASSWORD:-YourStrong!Passw0rd}", "-Q", "SELECT 1"]
+      test: ["CMD", "bash", "/healthcheck.sh"]
       interval: 10s
       timeout: 5s
       retries: 10

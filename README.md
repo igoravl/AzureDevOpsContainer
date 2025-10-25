@@ -50,15 +50,21 @@ azuredevops:
 
 ### 4. Configure SQL Server Password
 
+**IMPORTANT**: Before proceeding, you must set a strong, secure password.
+
 Option 1: Using .env file (recommended)
 
-The password is already set in your `.env` file from step 3.
+```bash
+# Edit .env and set a strong password
+# DO NOT use the default placeholder password!
+SA_PASSWORD=Your$ecureP@ssw0rd123
+```
 
 Option 2: Edit `docker-compose.yml` directly and update the `SA_PASSWORD`:
 
 ```yaml
 environment:
-  - SA_PASSWORD=YourStrong!Passw0rd  # Change to a secure password
+  - SA_PASSWORD=Your$ecureP@ssw0rd123  # Change to a secure password
 ```
 
 **Important**: The password must meet SQL Server complexity requirements:
@@ -187,11 +193,37 @@ docker-compose down -v
 
 ## Security Considerations
 
-1. **Change default passwords** before deploying to any non-development environment
-2. **Use HTTPS** in production by updating the configuration
-3. **Restrict network access** appropriately
-4. **Regular backups** of SQL Server data volume
-5. **Keep images updated** with security patches
+**CRITICAL**: This setup is designed for development and testing purposes. Follow these security best practices:
+
+1. **Change ALL default passwords immediately**
+   - Never use placeholder passwords like "CHANGE_ME_TO_SECURE_PASSWORD!123"
+   - Use a password manager to generate strong, unique passwords
+   - SQL Server password must be at least 8 characters with uppercase, lowercase, numbers, and special characters
+
+2. **Protect sensitive credentials**
+   - Never commit the `.env` file to version control (it's in `.gitignore`)
+   - Store passwords securely using secret management tools in production
+   - The healthcheck script reads passwords from environment variables to avoid process list exposure
+
+3. **Use HTTPS in production**
+   - Update the configuration to use SSL/TLS certificates
+   - Never expose Azure DevOps Server over HTTP in production environments
+
+4. **Restrict network access appropriately**
+   - Use firewall rules to limit who can access the containers
+   - Consider using Docker network isolation for additional security
+
+5. **Regular backups**
+   - Implement automated backups of the SQL Server data volume
+   - Test backup restoration procedures regularly
+
+6. **Keep images updated**
+   - Regularly update base images for security patches
+   - Monitor security advisories for Azure DevOps Server and SQL Server
+
+7. **Review and audit**
+   - Enable logging and monitor access to Azure DevOps Server
+   - Regularly review user permissions and access controls
 
 ## License
 
